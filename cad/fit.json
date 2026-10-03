@@ -1,0 +1,341 @@
+{
+  "board_ref_frame": "spec board frame (spec section 0): x toward the head, y toward the notch, z up, board bottom face z = -0.00, top z = 1.51 (the STEP's board body)",
+  "cradle_to_parts": {
+    "scope": "every body reaching below the board (11 parts)",
+    "min_mm": 1.217,
+    "nearest": [
+      {
+        "ref": "J9",
+        "mm": 1.217,
+        "body": "step"
+      },
+      {
+        "ref": "J8",
+        "mm": 1.497,
+        "body": "step"
+      },
+      {
+        "ref": "J10",
+        "mm": 2.48,
+        "body": "right-angle envelope (replaces the land's straight-header model)"
+      },
+      {
+        "ref": "J11",
+        "mm": 2.48,
+        "body": "right-angle envelope (replaces the land's straight-header model)"
+      },
+      {
+        "ref": "J12",
+        "mm": 2.48,
+        "body": "right-angle envelope (replaces the land's straight-header model)"
+      },
+      {
+        "ref": "J13",
+        "mm": 2.48,
+        "body": "right-angle envelope (replaces the land's straight-header model)"
+      }
+    ],
+    "interferences": []
+  },
+  "cradle_to_plugs": {
+    "min_mm": 1.5,
+    "nearest": [
+      {
+        "what": "J3 plug+cable",
+        "mm": 1.5
+      },
+      {
+        "what": "J10 plugs",
+        "mm": 2.48
+      },
+      {
+        "what": "J11 plugs",
+        "mm": 2.48
+      },
+      {
+        "what": "J12 plugs",
+        "mm": 2.48
+      }
+    ]
+  },
+  "cradle_to_board_body": {
+    "min_mm": 0.0,
+    "common_volume_mm3": 0.0,
+    "contact": "the four boss tops seat on the board's bottom face at the holes (designed contact, 136 mm2 of seat)",
+    "floor_top_below_board_mm": 10.5
+  },
+  "rails_to_parts": {
+    "scope": "every body standing above the board (105 parts)",
+    "min_mm": 0.1,
+    "nearest": [
+      {
+        "ref": "J9",
+        "mm": 0.1,
+        "body": "step"
+      },
+      {
+        "ref": "C20",
+        "mm": 0.195,
+        "body": "step"
+      },
+      {
+        "ref": "Y1",
+        "mm": 0.68,
+        "body": "step"
+      },
+      {
+        "ref": "L1",
+        "mm": 0.93,
+        "body": "step"
+      },
+      {
+        "ref": "C1",
+        "mm": 1.18,
+        "body": "step"
+      },
+      {
+        "ref": "C2",
+        "mm": 1.23,
+        "body": "step"
+      }
+    ],
+    "seat_diameter_mm": 7.0,
+    "nearest_plan_distance_to_a_hole_centre_mm": {
+      "J9": 3.6,
+      "C20": 3.7,
+      "Y1": 4.2,
+      "L1": 10.22,
+      "C1": 4.76,
+      "C2": 8.41
+    }
+  },
+  "rails_to_board_body": {
+    "min_mm": 0.0,
+    "contact": "rail bosses on the board's top face at the holes (designed)"
+  },
+  "rails_to_cradle_mm": 1.51,
+  "belly": {
+    "cradle_mm": 4.39,
+    "lowest_board_part_mm": 8.87,
+    "battery_plug_housing_mm": 4.805,
+    "note": "belly rebuilt from the spec's 18.4 mm gap (shared-frame assumption); the battery cable column is a keep-out drawn down through the floor opening toward the pack, not a measured part"
+  },
+  "cradle": {
+    "floor_top_z": -10.5,
+    "floor_bottom_z": -12.5,
+    "boss_od": 7.0,
+    "boss_bore": 2.4,
+    "volume_mm3": 7379.5,
+    "mass_g_petg": 9.4,
+    "screw": "M2 self-tapping, about 16 mm (boss 11.1 + board 1.51 + rail 3.0), or Petoi screw B",
+    "stl": {
+      "watertight": true,
+      "faces": 7578,
+      "volume_mm3": 7379.0,
+      "bounds_mm": [
+        [
+          -0.28,
+          -0.13,
+          -12.5
+        ],
+        [
+          64.72,
+          55.87,
+          -0.0
+        ]
+      ]
+    }
+  },
+  "holes": {
+    "spec_frame": [
+      [
+        3.22,
+        3.37
+      ],
+      [
+        3.22,
+        52.37
+      ],
+      [
+        61.22,
+        3.37
+      ],
+      [
+        61.22,
+        52.37
+      ]
+    ],
+    "pattern_mm": [
+      58.0,
+      49.0
+    ]
+  },
+  "bodies": {
+    "from_step": [
+      "C1",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C2",
+      "C20",
+      "C21",
+      "C22",
+      "C23",
+      "C24",
+      "C25",
+      "C26",
+      "C27",
+      "C28",
+      "C29",
+      "C3",
+      "C30",
+      "C31",
+      "C32",
+      "C33",
+      "C34",
+      "C35",
+      "C36",
+      "C37",
+      "C38",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5",
+      "D6",
+      "F1",
+      "FB1",
+      "J1",
+      "J3",
+      "J8",
+      "J9",
+      "L1",
+      "Q1",
+      "R1",
+      "R10",
+      "R11",
+      "R12",
+      "R13",
+      "R14",
+      "R15",
+      "R16",
+      "R17",
+      "R18",
+      "R19",
+      "R2",
+      "R20",
+      "R21",
+      "R22",
+      "R23",
+      "R24",
+      "R25",
+      "R26",
+      "R27",
+      "R28",
+      "R29",
+      "R3",
+      "R30",
+      "R31",
+      "R32",
+      "R33",
+      "R34",
+      "R4",
+      "R5",
+      "R6",
+      "R7",
+      "R8",
+      "R9",
+      "U1",
+      "U10",
+      "U2",
+      "U3",
+      "U4",
+      "U5",
+      "U6",
+      "U7",
+      "U8",
+      "U9",
+      "Y1"
+    ],
+    "envelopes": {
+      "BZ1": "envelope 3.00 mm: PKLCS1212E4001-R1 catalogue row (C113159) lists 3 mm",
+      "J2": "envelope 3.26 mm: heypcb-kicad models3d envelope (HRO datasheet, 3.26 mm)",
+      "J4": "envelope 8.00 mm: ZX-HY2.0-4PZZ catalogue row (C7429580) lists 8 mm",
+      "J5": "envelope 8.00 mm: ZX-HY2.0-4PZZ catalogue row (C7429580) lists 8 mm",
+      "J6": "envelope 8.00 mm: ZX-HY2.0-4PZZ catalogue row (C7429580) lists 8 mm",
+      "J7": "envelope 8.00 mm: ZX-HY2.0-4PZZ catalogue row (C7429580) lists 8 mm",
+      "SW1": "envelope 1.50 mm: TS-1187A-B-A-B catalogue row (C318884) lists 1.5 mm",
+      "U11": "envelope 4.00 mm: estimated: no height in the IRM-H638T catalogue row"
+    },
+    "right_angle_servo_headers": [
+      "J10",
+      "J11",
+      "J12",
+      "J13",
+      "J14",
+      "J15",
+      "J16"
+    ],
+    "without_body": [
+      "JP1",
+      "JP2"
+    ]
+  },
+  "assumed": {
+    "right_angle_header": {
+      "pitch": 2.54,
+      "insulator": 2.5,
+      "pin_out": 6.0,
+      "pin": 0.64,
+      "standoff": 0.4,
+      "bend_gap": 1.5,
+      "source": "PZ254-3-03-W-2.5-G0 catalogue row (C7429379): 2.54 mm pitch, 3 rows, 2.5 mm insulator, 6 mm pins; standoff and bend gap estimated"
+    },
+    "servo_plug": {
+      "length": 14.0,
+      "width": 2.6,
+      "source": "spec 5: plug length about 14 mm (estimated); width a standard servo plug's, estimated"
+    },
+    "battery_plug": {
+      "below_housing": 5.0,
+      "cable_to": -20.0,
+      "cable_w": 4.0,
+      "cable_d": 2.5,
+      "source": "spec 2.4: XH housing 7.0 mm, about 12 mm with the plug mated (estimated); cable leaves downward"
+    },
+    "frame": {
+      "rail_t": 3.0,
+      "rail_inner": 28.0,
+      "rail_outer": 34.5,
+      "rail_half_len": 62.2,
+      "boss_reach": 22.5,
+      "boss_r": 3.5,
+      "pilot_d": 1.4,
+      "holes_Z": [
+        -41.0,
+        -29.0,
+        29.0,
+        41.0
+      ],
+      "hole_X": 24.52,
+      "belly_gap": 18.4,
+      "belly_t": 3.0,
+      "note": "rails and belly rebuilt from spec 2.4, 2.6 and 5 (STL measurements, not the STLs, which carry no licence); rail ends wider than 34.5 mm are not modelled; boss = 7 mm disc at the hole plus a bridge to the rail, cut at X = 22.5; the belly gap rests on the spec's shared-frame assumption"
+    },
+    "board_top": "the rails seat on the STEP's board body top (z 1.51); KiCad seats parts at 1.59",
+    "robot_frame": "X = y - 27.87, Z = x - 32.22, Y = z - 1.51 - 3"
+  }
+}

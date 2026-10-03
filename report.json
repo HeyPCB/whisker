@@ -1,0 +1,976 @@
+{
+  "parts": {
+    "bound": 112,
+    "unsourced": 0,
+    "conflicts": 0,
+    "refs_by_status": {
+      "bound": [
+        "U1",
+        "Y1",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "FB1",
+        "R1",
+        "SW1",
+        "J1",
+        "J2",
+        "R2",
+        "R3",
+        "U2",
+        "U3",
+        "C6",
+        "C7",
+        "C8",
+        "R4",
+        "F1",
+        "U4",
+        "C9",
+        "C10",
+        "J3",
+        "Q1",
+        "R5",
+        "D1",
+        "C11",
+        "C12",
+        "D2",
+        "D3",
+        "R6",
+        "R7",
+        "R8",
+        "C13",
+        "U5",
+        "L1",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "R9",
+        "R10",
+        "R11",
+        "C18",
+        "C19",
+        "C20",
+        "U6",
+        "C21",
+        "C22",
+        "U7",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "C23",
+        "U8",
+        "C24",
+        "C25",
+        "U9",
+        "C26",
+        "C27",
+        "C28",
+        "C29",
+        "U10",
+        "C30",
+        "BZ1",
+        "R17",
+        "U11",
+        "C31",
+        "D4",
+        "C32",
+        "R18",
+        "D5",
+        "R19",
+        "D6",
+        "R20",
+        "J4",
+        "J5",
+        "J6",
+        "J7",
+        "J8",
+        "C33",
+        "J9",
+        "R21",
+        "R22",
+        "R23",
+        "C34",
+        "J10",
+        "R24",
+        "J11",
+        "R25",
+        "R26",
+        "C35",
+        "J12",
+        "R27",
+        "R28",
+        "C36",
+        "J13",
+        "R29",
+        "R30",
+        "C37",
+        "J14",
+        "R31",
+        "J15",
+        "R32",
+        "R33",
+        "C38",
+        "J16",
+        "R34"
+      ],
+      "unsourced": [],
+      "conflict": []
+    },
+    "not_in_bom": [
+      "JP1",
+      "JP2",
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "extended_distinct": [
+      "C113159",
+      "C116592",
+      "C12624",
+      "C14877",
+      "C158012",
+      "C165948",
+      "C24112",
+      "C2678753",
+      "C2761795",
+      "C2869734",
+      "C33196",
+      "C40877",
+      "C492399",
+      "C492420",
+      "C6487",
+      "C7429379",
+      "C7429580",
+      "C7471878",
+      "C7519",
+      "C7542947",
+      "C78804",
+      "C81007",
+      "C84266",
+      "C84681",
+      "C908764",
+      "C91447",
+      "C965800"
+    ],
+    "extended_fee_usd": 81.0,
+    "findings": [
+      {
+        "code": "jlcpcb_extended_parts",
+        "severity": "info",
+        "detail": "27 distinct Extended parts, about $81 in JLC loading fees",
+        "fix": "swap an Extended part for a Basic one where the table lists one"
+      }
+    ],
+    "table": "lcsc_pinned.json",
+    "table_source": "HeyPCB runner/cache/jlcparts/cache.sqlite3, table jlc_components, queried 2026-09-26. Each row's `snapshot` is that row's fetched_at."
+  },
+  "compose": {
+    "components": 118,
+    "nets": 81,
+    "noConnects": [
+      "J2.A8",
+      "J2.B8",
+      "J8.5",
+      "J9.1",
+      "U4.5"
+    ],
+    "ran": true,
+    "seconds": 3.2
+  },
+  "schematic": {
+    "paper": "A1",
+    "file": "whisker.kicad_sch",
+    "ran": true,
+    "seconds": 15.7
+  },
+  "erc": {
+    "ran": true,
+    "errors": 0,
+    "warnings": 0,
+    "types": [],
+    "seconds": 1.2
+  },
+  "netlist": {
+    "ok": true,
+    "missing": [],
+    "extra": [],
+    "differ": [],
+    "nets": 81,
+    "ran": true,
+    "seconds": 0.2
+  },
+  "board": {
+    "footprints": 118,
+    "outline_mm": [
+      64.8,
+      55.4
+    ],
+    "stackup": {
+      "copper": 4,
+      "layers": [
+        "F.Cu",
+        "In1.Cu",
+        "In2.Cu",
+        "B.Cu"
+      ],
+      "planes": {},
+      "plane_layers": [],
+      "signal_layers": [
+        "F.Cu",
+        "In1.Cu",
+        "In2.Cu",
+        "B.Cu"
+      ],
+      "dfm_profile": "jlcpcb_4layer"
+    },
+    "ran": true,
+    "seconds": 2.0
+  },
+  "place": {
+    "parts": 118,
+    "log": [
+      "H1 -> (3.22, 3.03) rot 0 : rung 0 lock: top-left hole of the 58.0 x 49.0 pattern, centred as measured (spec 2.7)",
+      "H2 -> (61.22, 3.03) rot 0 : rung 0 lock: top-right hole",
+      "H3 -> (3.22, 52.03) rot 0 : rung 0 lock: bottom-left hole",
+      "H4 -> (61.22, 52.03) rot 0 : rung 0 lock: bottom-right hole",
+      "J10 -> (11.26, 32.40) rot 180 : rung 0 lock: tail, ch 4: lower-left group column 1, pad 1 on the PWM row (spec 1.6)",
+      "J11 -> (18.88, 32.40) rot 180 : rung 0 lock: right hind knee ch 7 (pad-1 column, x 18.88) and hip ch 6 (x 16.34): lower-left group",
+      "J12 -> (16.34, 22.20) rot 0 : rung 0 lock: left hind hip ch 1 (pad-1 column, x 16.34) and knee ch 0 (x 18.88): upper-left group",
+      "J13 -> (43.44, 32.40) rot 180 : rung 0 lock: right front shoulder ch 9 (pad-1 column, x 43.44) and knee ch 8 (x 40.90): lower-right group",
+      "J14 -> (48.52, 32.40) rot 180 : rung 0 lock: head tilt, ch 11: lower-right group column 4",
+      "J15 -> (40.90, 22.20) rot 0 : rung 0 lock: left front knee ch 15 (pad-1 column, x 40.90) and shoulder ch 14 (x 43.44): upper-right group",
+      "J16 -> (48.52, 22.20) rot 0 : rung 0 lock: head pan, ch 12: upper-right group column 4",
+      "J3 -> (24.45, 40.60) rot 0 : rung 0 lock: keyed XH on the back where the stock socket is: + at (24.45, 14.8), - at +2.5 mm in x (spec 1.7)",
+      "J9 -> (56.35, 4.30) rot 270 : rung 0 lock: Pi pin 1 where a face-to-face Pi's pin 1 lands (spec 1.7: 61.22 - 4.87), every pad on its Pi pin",
+      "J8 -> (2.60, 21.00) rot 180 : rung 0 lock: 6-pin socket along the rear edge, DTR lowest and GND toward the notch (spec 1.7), 0.3 mm in from the photo column",
+      "J4 -> (54.30, 11.00) rot 90 : rung 0 lock: Grove column on the front (head) edge, G1 at the stock height, 7 mm pitch so the lower-right corner stays free for the Pi parts (8 mm left a GND pin open, 2026-10-02)",
+      "J5 -> (54.30, 18.00) rot 90 : rung 0 lock: Grove column on the front (head) edge, G1 at the stock height, 7 mm pitch so the lower-right corner stays free for the Pi parts (8 mm left a GND pin open, 2026-10-02)",
+      "J6 -> (54.30, 25.00) rot 90 : rung 0 lock: Grove column on the front (head) edge, G1 at the stock height, 7 mm pitch so the lower-right corner stays free for the Pi parts (8 mm left a GND pin open, 2026-10-02)",
+      "J7 -> (54.30, 32.00) rot 90 : rung 0 lock: Grove column on the front (head) edge, G1 at the stock height, 7 mm pitch so the lower-right corner stays free for the Pi parts (8 mm left a GND pin open, 2026-10-02)",
+      "SW1 -> (4.60, 44.60) rot 0 : rung 0 lock: reset at the rear edge as stock (spec 1.7)",
+      "U11 -> (5.00, 37.30) rot 0 : rung 0 lock: IR receiver at the rear edge, where the stock receiver looks out",
+      "C31 -> (5.00, 40.90) rot 0 : rung 0 lock: IR supply decoupling under the receiver",
+      "U1 -> (15.80, 47.60) rot 0 : rung 0 lock: ATmega328P in the bottom-left, where the stock MCU sits",
+      "Y1 -> (8.65, 50.00) rot 90 : rung 0 lock: 16 MHz crystal at XTAL1/XTAL2 (pins 7/8, left side)",
+      "C1 -> (8.70, 53.30) rot 180 : rung 0 lock: XTAL1 load cap straight under the crystal's XTAL1 pin",
+      "C2 -> (12.30, 53.90) rot 0 : rung 0 lock: XTAL2 load cap",
+      "C3 -> (9.50, 45.90) rot 90 : rung 0 lock: VCC decoupling at pins 4/5/6",
+      "C5 -> (14.95, 53.90) rot 0 : rung 0 lock: AREF decoupling",
+      "C4 -> (17.05, 53.90) rot 0 : rung 0 lock: AVCC decoupling behind the ferrite",
+      "FB1 -> (19.70, 53.90) rot 0 : rung 0 lock: AVCC ferrite from 5 V",
+      "C33 -> (10.25, 41.00) rot 0 : rung 0 lock: dongle DTR auto-reset cap, by RESET",
+      "R1 -> (12.40, 41.00) rot 90 : rung 0 lock: RESET pull-up above pin 29",
+      "C8 -> (14.55, 41.00) rot 0 : rung 0 lock: CH340C DTR auto-reset cap, by RESET",
+      "J1 -> (18.80, 8.45) rot 0 : rung 0 lock: ICSP 2x3 in the top strip between the CH340C and the buzzer",
+      "U3 -> (11.60, 10.40) rot 90 : rung 0 lock: CH340C in the top-left corner, UD+/UD- on its lower row toward the receptacle",
+      "C6 -> (5.40, 10.40) rot 270 : rung 0 lock: CH340C VCC decoupling at pins 16/1",
+      "C7 -> (11.00, 15.05) rot 0 : rung 0 lock: V3 decoupling under pin 4",
+      "R4 -> (10.20, 16.80) rot 0 : rung 0 lock: 1k from CH340C TXD to the MCU's RX",
+      "U4 -> (10.30, 19.00) rot 0 : rung 0 lock: LM66100 ideal diode: USB 5 V onto the logic rail only",
+      "C10 -> (13.20, 18.85) rot 90 : rung 0 lock: LM66100 input cap",
+      "F1 -> (11.40, 21.60) rot 0 : rung 0 lock: 500 mA PTC on VBUS",
+      "C9 -> (11.00, 24.00) rot 0 : rung 0 lock: VBUS bulk at the receptacle",
+      "R2 -> (9.70, 25.90) rot 0 : rung 0 lock: CC1 5.1k at the receptacle",
+      "U2 -> (11.20, 28.60) rot 90 : rung 0 lock: USBLC6 clamp on D+/D- right at the receptacle",
+      "R3 -> (13.70, 28.50) rot 90 : rung 0 lock: CC2 5.1k beside the clamp, clear of the tail header's pad 1",
+      "D3 -> (16.10, 25.00) rot 0 : rung 0 lock: battery / servo-rail LED",
+      "R6 -> (19.20, 25.00) rot 180 : rung 0 lock: battery LED resistor, fed from the upper-left group's rail pin",
+      "D6 -> (16.10, 27.30) rot 0 : rung 0 lock: 5 V logic LED",
+      "R20 -> (19.20, 27.30) rot 180 : rung 0 lock: 5 V LED resistor",
+      "D5 -> (16.10, 29.60) rot 0 : rung 0 lock: D3 status LED (firmware LED_PIN 3)",
+      "R19 -> (19.20, 29.60) rot 180 : rung 0 lock: D3 LED resistor",
+      "BZ1 -> (29.90, 12.70) rot 0 : rung 0 lock: piezo buzzer in the top-centre",
+      "R17 -> (27.00, 19.90) rot 0 : rung 0 lock: buzzer series resistor",
+      "U8 -> (29.90, 26.00) rot 0 : rung 0 lock: PCA9685 between the servo groups: LED0-7 face the left groups, LED8-15 the right",
+      "C24 -> (32.00, 19.90) rot 0 : rung 0 lock: PCA9685 VDD decoupling at pin 28",
+      "C25 -> (36.60, 20.60) rot 0 : rung 0 lock: PCA9685 bulk",
+      "C36 -> (22.15, 18.80) rot 90 : rung 0 lock: 10 uF on the rail at the upper-left group",
+      "R28 -> (23.30, 23.00) rot 180 : rung 0 lock: 1k PWM series resistor, left column beside the PCA9685's LED0-7 pins",
+      "R27 -> (23.30, 24.80) rot 180 : rung 0 lock: 1k PWM series resistor, left column beside the PCA9685's LED0-7 pins",
+      "R24 -> (23.30, 26.60) rot 180 : rung 0 lock: 1k PWM series resistor, left column beside the PCA9685's LED0-7 pins",
+      "R26 -> (23.30, 28.40) rot 180 : rung 0 lock: 1k PWM series resistor, left column beside the PCA9685's LED0-7 pins",
+      "R25 -> (23.30, 30.20) rot 180 : rung 0 lock: 1k PWM series resistor, left column beside the PCA9685's LED0-7 pins",
+      "R32 -> (36.50, 22.60) rot 0 : rung 0 lock: 1k PWM series resistor, right column beside the PCA9685's LED8-15 pins",
+      "R33 -> (36.50, 24.30) rot 0 : rung 0 lock: 1k PWM series resistor, right column beside the PCA9685's LED8-15 pins",
+      "R34 -> (36.50, 26.00) rot 0 : rung 0 lock: 1k PWM series resistor, right column beside the PCA9685's LED8-15 pins",
+      "R31 -> (36.50, 27.70) rot 0 : rung 0 lock: 1k PWM series resistor, right column beside the PCA9685's LED8-15 pins",
+      "R29 -> (36.50, 29.40) rot 0 : rung 0 lock: 1k PWM series resistor, right column beside the PCA9685's LED8-15 pins",
+      "R30 -> (36.50, 31.10) rot 0 : rung 0 lock: 1k PWM series resistor, right column beside the PCA9685's LED8-15 pins",
+      "C35 -> (19.40, 40.90) rot 0 : rung 0 lock: 10 uF on the rail at the lower-left group",
+      "C38 -> (37.70, 17.10) rot 90 : rung 0 lock: 10 uF on the rail at the upper-right group",
+      "U7 -> (25.60, 34.40) rot 0 : rung 0 lock: PCA9306: 3.3 V side left, 5 V side right",
+      "R15 -> (22.30, 34.00) rot 90 : rung 0 lock: SDA 3.3 V pull-up",
+      "R16 -> (22.30, 37.30) rot 90 : rung 0 lock: SCL 3.3 V pull-up",
+      "C23 -> (25.00, 37.00) rot 0 : rung 0 lock: VREF1 decoupling",
+      "R12 -> (29.60, 33.00) rot 0 : rung 0 lock: VREF2/EN 200k to 5 V",
+      "R13 -> (29.60, 34.80) rot 0 : rung 0 lock: SDA5 pull-up",
+      "R14 -> (29.60, 36.60) rot 0 : rung 0 lock: SCL5 pull-up",
+      "JP1 -> (28.50, 38.80) rot 0 : rung 0 lock: PI I2C jumper: bridge to hand the bus to a Pi",
+      "U6 -> (34.00, 34.40) rot 0 : rung 0 lock: 3.3 V LDO",
+      "C21 -> (33.00, 37.40) rot 0 : rung 0 lock: LDO input cap",
+      "C22 -> (36.30, 37.40) rot 0 : rung 0 lock: LDO output cap",
+      "JP2 -> (37.70, 34.40) rot 90 : rung 0 lock: CAL jumper: bridge to feed PWM channel 3 to A3",
+      "U9 -> (40.60, 10.60) rot 180 : rung 0 lock: MPU-6050 turned 180 degrees: pin 1 at the bottom-right in top view, as the stock board's (spec 1.7)",
+      "C26 -> (39.90, 14.45) rot 0 : rung 0 lock: VDD decoupling",
+      "C27 -> (42.00, 14.45) rot 0 : rung 0 lock: VLOGIC decoupling",
+      "C28 -> (44.10, 14.45) rot 0 : rung 0 lock: REGOUT cap",
+      "C29 -> (46.80, 14.45) rot 0 : rung 0 lock: CPOUT charge-pump cap",
+      "U10 -> (47.60, 9.90) rot 90 : rung 0 lock: AT24C64 beside the IMU",
+      "C30 -> (44.07, 9.00) rot 90 : rung 0 lock: EEPROM decoupling at pin 8",
+      "D4 -> (42.60, 27.30) rot 180 : rung 0 lock: NeoPixel between the right servo groups, toward the head",
+      "C37 -> (47.60, 27.30) rot 90 : rung 0 lock: 10 uF on the rail at the lower-right group",
+      "C32 -> (49.90, 28.60) rot 90 : rung 0 lock: NeoPixel decoupling",
+      "R18 -> (49.90, 25.50) rot 90 : rung 0 lock: NeoPixel data series resistor",
+      "Q1 -> (26.40, 44.40) rot 180 : rung 0 lock: AON6411 under the battery socket: drain toward the + pin, source pins toward the bulk caps",
+      "R5 -> (30.50, 42.00) rot 90 : rung 0 lock: FET gate pull-down beside the gate pin",
+      "D1 -> (26.40, 50.60) rot 180 : rung 0 lock: SMAJ10A across the protected rail, cathode at the FET's source",
+      "C11 -> (33.60, 49.20) rot 270 : rung 0 lock: 330 uF servo-rail bulk, + up",
+      "C12 -> (40.90, 49.20) rot 270 : rung 0 lock: 330 uF servo-rail bulk, + up",
+      "D2 -> (34.60, 41.60) rot 180 : rung 0 lock: SS34 from the servo rail to the buck input",
+      "R7 -> (22.00, 43.90) rot 270 : rung 0 lock: battery divider, top: its rail pad faces up, where the 1.0 mm rail arrives (facing down it stayed open in the strip, 2026-10-02)",
+      "R8 -> (22.00, 47.00) rot 270 : rung 0 lock: battery divider, bottom: sense pad up, against the top resistor's",
+      "C13 -> (22.00, 49.60) rot 90 : rung 0 lock: A7 filter cap",
+      "C14 -> (40.40, 41.60) rot 0 : rung 0 lock: buck input 22 uF at the feed diode",
+      "C16 -> (43.40, 41.60) rot 90 : rung 0 lock: buck input 100 nF",
+      "U5 -> (46.70, 45.50) rot 90 : rung 0 lock: TPS563201, SW on its lower row toward the inductor",
+      "C15 -> (49.60, 45.80) rot 90 : rung 0 lock: buck input 22 uF at VIN/GND",
+      "R9 -> (46.30, 40.30) rot 0 : rung 0 lock: feedback top 82k",
+      "R10 -> (49.60, 40.30) rot 0 : rung 0 lock: feedback bottom 15k",
+      "R11 -> (46.30, 42.40) rot 0 : rung 0 lock: EN pull-up to VIN",
+      "C17 -> (49.60, 42.40) rot 0 : rung 0 lock: bootstrap cap",
+      "L1 -> (48.00, 51.60) rot 0 : rung 0 lock: 4.7 uH buck inductor",
+      "C18 -> (52.50, 51.00) rot 90 : rung 0 lock: 5 V output 22 uF",
+      "C19 -> (54.70, 51.00) rot 90 : rung 0 lock: 5 V output 22 uF",
+      "C20 -> (56.90, 51.00) rot 90 : rung 0 lock: 5 V output 22 uF",
+      "R21 -> (53.50, 38.50) rot 0 : rung 0 lock: 1k from the Pi's TXD to the MCU's RX",
+      "R22 -> (57.00, 38.50) rot 0 : rung 0 lock: divider top: MCU TX to the Pi's RXD",
+      "R23 -> (53.50, 40.60) rot 0 : rung 0 lock: divider bottom",
+      "C34 -> (57.00, 40.60) rot 0 : rung 0 lock: Pi GPIO4 reset coupling cap",
+      "J2 -> (3.20, 28.60) rot 270 : rung 2 edge connector on the left edge, mouth outward"
+    ],
+    "ran": true,
+    "seconds": 2.9
+  },
+  "route": {
+    "before": 297,
+    "after": 0,
+    "open_by_net": {},
+    "fixes": [],
+    "passes": [
+      [
+        1,
+        20
+      ],
+      [
+        2,
+        9
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        7,
+        3
+      ],
+      [
+        8,
+        3
+      ],
+      [
+        9,
+        3
+      ],
+      [
+        10,
+        3
+      ],
+      [
+        11,
+        3
+      ],
+      [
+        12,
+        3
+      ],
+      [
+        13,
+        3
+      ],
+      [
+        14,
+        3
+      ],
+      [
+        15,
+        3
+      ],
+      [
+        16,
+        3
+      ],
+      [
+        17,
+        3
+      ],
+      [
+        18,
+        3
+      ]
+    ],
+    "stats": {
+      "tracks": 1181,
+      "vias": 109,
+      "length_mm": 2676.6,
+      "length_by_layer_mm": {
+        "B.Cu": 132.0,
+        "F.Cu": 835.9,
+        "In1.Cu": 874.1,
+        "In2.Cu": 834.7
+      }
+    },
+    "layers": [
+      [
+        "F.Cu",
+        "signal"
+      ],
+      [
+        "In1.Cu",
+        "signal"
+      ],
+      [
+        "In2.Cu",
+        "signal"
+      ],
+      [
+        "B.Cu",
+        "signal"
+      ]
+    ],
+    "ladder": [
+      {
+        "rung": 1,
+        "tag": "1_fanout",
+        "classes": {},
+        "fanout": true,
+        "export": {
+          "poursWithheld": 0,
+          "keepoutsMirrored": 1,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 50,
+            "renamed": 9,
+            "nets": 116
+          },
+          "viaViaClearance_mm": 0.2
+        },
+        "seconds": 91.1,
+        "ok": true,
+        "log": {
+          "nets": {
+            "5V": 5
+          },
+          "timedOut": false,
+          "noProgress": true,
+          "last_unrouted": 5,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 60,
+          "kept_narrow": 57,
+          "raised_to_min": 2,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 3,
+          "score": 3,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 3,
+        "last_mile": {
+          "ok": true,
+          "openBefore": 5,
+          "openAfterModel": 3,
+          "closed": 2,
+          "tracks": 11,
+          "vias": 4,
+          "deadlineHit": false,
+          "limitations": [],
+          "seconds": 2.53,
+          "connections": [
+            {
+              "net": "5V",
+              "from": "R1.1",
+              "to": "U1.4",
+              "outcome": "no_path"
+            },
+            {
+              "net": "5V",
+              "from": "U1.4",
+              "to": "C3.1",
+              "outcome": "no_path"
+            },
+            {
+              "net": "5V",
+              "from": "J9.2",
+              "to": "C18.1",
+              "outcome": "no_path"
+            },
+            {
+              "net": "5V",
+              "from": "C3.1",
+              "to": "C18.1",
+              "outcome": "closed",
+              "vias": 2,
+              "lengthMm": 16.07
+            },
+            {
+              "net": "5V",
+              "from": "C6.1",
+              "to": "C18.1",
+              "outcome": "closed",
+              "vias": 2,
+              "lengthMm": 9.6
+            }
+          ],
+          "accepted": true,
+          "verdict": {
+            "beforeU": 5,
+            "afterU": 3,
+            "beforeE": 0,
+            "afterE": 0,
+            "introduced": 0,
+            "rekeyed": 0,
+            "introducedTypes": [],
+            "kind": "ok",
+            "accept": true
+          },
+          "kept_tracks": 11,
+          "kept_vias": 4
+        },
+        "open_by_net": {
+          "5V": 3
+        },
+        "stats": {
+          "tracks": 1170,
+          "vias": 112,
+          "length_mm": 2688.8,
+          "length_by_layer_mm": {
+            "B.Cu": 131.2,
+            "F.Cu": 818.2,
+            "In1.Cu": 935.3,
+            "In2.Cu": 804.1
+          }
+        }
+      },
+      {
+        "rung": 1,
+        "tag": "1_nofanout",
+        "classes": {},
+        "fanout": false,
+        "export": {
+          "poursWithheld": 0,
+          "keepoutsMirrored": 1,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 50,
+            "renamed": 9,
+            "nets": 116
+          },
+          "viaViaClearance_mm": 0.2
+        },
+        "seconds": 125.4,
+        "ok": true,
+        "log": {
+          "nets": {
+            "5V": 6,
+            "BAT_RAW": 5,
+            "GND": 1,
+            "U9_CPOUT": 1,
+            "U9_REGOUT": 1,
+            "VBUS": 3
+          },
+          "timedOut": false,
+          "noProgress": true,
+          "last_unrouted": 17,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 0,
+          "kept_narrow": 0,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 1,
+          "unconnected": 12,
+          "score": 15,
+          "types": {
+            "clearance": 1
+          },
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 12,
+        "open_by_net": {
+          "GND": 1,
+          "5V": 6,
+          "VBUS": 3,
+          "SCL": 1,
+          "BAT_RAW": 1
+        },
+        "stats": {
+          "tracks": 1040,
+          "vias": 94,
+          "length_mm": 2696.5,
+          "length_by_layer_mm": {
+            "B.Cu": 21.8,
+            "F.Cu": 1043.2,
+            "In1.Cu": 884.9,
+            "In2.Cu": 746.6
+          }
+        }
+      },
+      {
+        "rung": 2,
+        "tag": "2_narrow",
+        "classes": {
+          "PWR5": 0.2
+        },
+        "fanout": true,
+        "export": {
+          "poursWithheld": 0,
+          "keepoutsMirrored": 1,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 50,
+            "renamed": 9,
+            "nets": 116
+          },
+          "viaViaClearance_mm": 0.2
+        },
+        "seconds": 35.0,
+        "ok": true,
+        "log": {
+          "nets": {
+            "BAT_RAW": 2,
+            "GND": 1
+          },
+          "timedOut": false,
+          "noProgress": true,
+          "last_unrouted": 3,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 38,
+          "kept_narrow": 69,
+          "raised_to_min": 4,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 0,
+          "score": 0,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 0,
+        "last_mile": {
+          "ok": true,
+          "openBefore": 2,
+          "openAfterModel": 0,
+          "closed": 2,
+          "tracks": 5,
+          "vias": 0,
+          "deadlineHit": false,
+          "limitations": [],
+          "seconds": 0.29,
+          "connections": [
+            {
+              "net": "BAT_RAW",
+              "from": "J3.1",
+              "to": "Q1.5",
+              "outcome": "closed",
+              "vias": 0,
+              "lengthMm": 1.6
+            },
+            {
+              "net": "GND",
+              "from": "C1.2",
+              "to": "BZ1.2",
+              "outcome": "closed",
+              "vias": 0,
+              "lengthMm": 3.7
+            }
+          ],
+          "accepted": true,
+          "verdict": {
+            "beforeU": 2,
+            "afterU": 0,
+            "beforeE": 0,
+            "afterE": 0,
+            "introduced": 0,
+            "rekeyed": 0,
+            "introducedTypes": [],
+            "kind": "ok",
+            "accept": true
+          },
+          "kept_tracks": 5,
+          "kept_vias": 0
+        },
+        "open_by_net": {},
+        "stats": {
+          "tracks": 1181,
+          "vias": 109,
+          "length_mm": 2676.6,
+          "length_by_layer_mm": {
+            "B.Cu": 132.0,
+            "F.Cu": 835.9,
+            "In1.Cu": 874.1,
+            "In2.Cu": 834.7
+          }
+        }
+      }
+    ],
+    "kept_rung": "2_narrow",
+    "classes_routed": {
+      "PWR5": 0.2
+    },
+    "fanout_kept": true,
+    "fanout_compare": {
+      "1_fanout": {
+        "open": 3,
+        "score": 3,
+        "vias": 112,
+        "seconds": 91.1
+      },
+      "1_nofanout": {
+        "open": 12,
+        "score": 15,
+        "vias": 94,
+        "seconds": 125.4
+      }
+    },
+    "pad_vias": [],
+    "timedOut": false,
+    "noProgress": true,
+    "ran": true,
+    "seconds": 267.5
+  },
+  "pour": {
+    "plan": [
+      {
+        "layer": "F.Cu",
+        "net": "GND",
+        "priority": 0
+      },
+      {
+        "layer": "B.Cu",
+        "net": "GND",
+        "priority": 0
+      },
+      {
+        "layer": "In1.Cu",
+        "net": "5V",
+        "priority": 1
+      },
+      {
+        "layer": "In2.Cu",
+        "net": "VBAT",
+        "priority": 1
+      }
+    ],
+    "open_before": 0,
+    "open_after_pour": 0,
+    "stitch_vias": 10,
+    "open_after_stitch": 0,
+    "island_repair_vias": 0,
+    "open_final": 0,
+    "stats": {
+      "tracks": 1181,
+      "vias": 119,
+      "length_mm": 2676.6,
+      "length_by_layer_mm": {
+        "B.Cu": 132.0,
+        "F.Cu": 835.9,
+        "In1.Cu": 874.1,
+        "In2.Cu": 834.7
+      }
+    },
+    "ran": true,
+    "seconds": 1.5
+  },
+  "silk": {
+    "silk_clipped": 7,
+    "pin_labels": 7,
+    "silk_refused": [],
+    "words": 11,
+    "refs_seated": 20,
+    "refs_hidden": 87,
+    "title_offset_mm": [
+      -1.0,
+      36.5
+    ],
+    "title_lines": 4,
+    "stitch_vias_displaced": 1,
+    "ran": true,
+    "seconds": 1.0
+  },
+  "drc": {
+    "ran": true,
+    "state": "fresh",
+    "board_sha": "0338a04ecac918e14087a3904c5c6f8f5ef5a51e1d62f3f077544f2a50b9463b",
+    "errors": 0,
+    "warnings": 4,
+    "unconnected": 0,
+    "parity": 0,
+    "error_types": {},
+    "warning_types": {
+      "lib_footprint_mismatch": 2,
+      "silk_over_copper": 2
+    },
+    "repairs": [],
+    "seconds": 1.4
+  },
+  "dfm": {
+    "ran": true,
+    "profile": "jlcpcb_4layer",
+    "copper_layers": 4,
+    "errors": 0,
+    "warnings": 1,
+    "rows": [
+      {
+        "rule": "footprint_silk_width",
+        "severity": "warning",
+        "count": 422,
+        "min_mm": 0.12,
+        "note": "stock footprint silk down to 0.12 mm; the fab prints it at its 0.15 mm minimum"
+      }
+    ]
+  },
+  "view3d": {
+    "frames": 63,
+    "ran": true,
+    "seconds": 0.1
+  },
+  "fab": {
+    "gerbers": [
+      "whisker-B_Cu.gbl",
+      "whisker-B_Mask.gbs",
+      "whisker-B_Paste.gbp",
+      "whisker-B_Silkscreen.gbo",
+      "whisker-Edge_Cuts.gm1",
+      "whisker-F_Cu.gtl",
+      "whisker-F_Mask.gts",
+      "whisker-F_Paste.gtp",
+      "whisker-F_Silkscreen.gto",
+      "whisker-In1_Cu.g1",
+      "whisker-In2_Cu.g2",
+      "whisker-job.gbrjob"
+    ],
+    "copper_layers": 4,
+    "copper_gerbers": [
+      "whisker-F_Cu.gtl",
+      "whisker-In1_Cu.g1",
+      "whisker-In2_Cu.g2",
+      "whisker-B_Cu.gbl"
+    ],
+    "gerber_job": {
+      "file": "whisker-job.gbrjob",
+      "layer_number": 4,
+      "board_thickness_mm": 1.6,
+      "copper_files": [
+        "whisker-F_Cu.gtl",
+        "whisker-In1_Cu.g1",
+        "whisker-In2_Cu.g2",
+        "whisker-B_Cu.gbl"
+      ],
+      "copper_mm": [
+        0.035,
+        0.035,
+        0.035,
+        0.035
+      ],
+      "dielectric_mm": [
+        0.48,
+        0.48,
+        0.48
+      ],
+      "dielectric": [
+        "FR4",
+        "FR4",
+        "FR4"
+      ]
+    },
+    "drill": [
+      "whisker.drl",
+      "whisker-drl_map.gbr"
+    ],
+    "zip": "whisker_gerbers.zip",
+    "pos": "whisker_pos.csv",
+    "cpl": "whisker_cpl_jlc.csv",
+    "cpl_rotations_corrected": 9,
+    "bom": "whisker_bom.csv",
+    "schematic_pdf": "whisker_schematic.pdf",
+    "step": "whisker.step",
+    "ready": true,
+    "blockers": [],
+    "drc_state": "fresh",
+    "ran": true,
+    "seconds": 2.9
+  },
+  "render": {
+    "ran": true,
+    "seconds": 226.0
+  },
+  "video": {
+    "ran": true,
+    "seconds": 30.9
+  }
+}

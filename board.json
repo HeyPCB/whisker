@@ -1,0 +1,1664 @@
+{
+  "name": "whisker",
+  "title": "Whisker - controller for the Petoi Nybble robot cat, compatible with the OpenCat firmware",
+  "revision": "A",
+  "brief": "Drop-in controller for Petoi's Nybble (wooden robot cat), compatible with the Petoi Nybble / OpenCat firmware unmodified (NyBoard_V1_2 build): ATmega328P-AU at 16 MHz and 5 V with the Uno bootloader; PCA9685 at I2C 0x40 driving the 11 Nybble servos on their firmware channels through 3-row right-angle headers on the back at the stock grid; MPU-6050 at 0x68; 64 Kbit EEPROM at 0x54; buzzer D5, IR receiver D4, LED D3, NeoPixel D10, four Grove sockets (I2C, A2/A3, D8/D9, D6/D7), battery sense on A7. Improvements: USB-C with a CH340C and DTR auto-reset (the 6-pin dongle socket stays), reverse-polarity and TVS protection on the whole 2S battery input, a 3 A synchronous buck to 5 V, USB that powers only the logic rail, 660 uF of low-ESR bulk plus 10 uF per group on the servo rail, a Raspberry Pi 2x5 at the stacking position. Outline: the stock 64.8 x 55.4 mm footprint with its top notch, 58.0 x 49.0 mm hole pattern.",
+  "blocks": [
+    {
+      "block": "whisker_mcu_328p",
+      "as": "mcu",
+      "title": "ATmega328P-AU, 16 MHz, reset + ICSP",
+      "nets": {
+        "AVCC": "AVCC",
+        "RESET": "RESET",
+        "RXD": "RXD",
+        "TXD": "TXD",
+        "IMU_INT": "IMU_INT",
+        "LED_D3": "LED_D3",
+        "IR": "IR",
+        "BUZZER": "BUZZER",
+        "D6": "D6",
+        "D7": "D7",
+        "D8": "D8",
+        "D9": "D9",
+        "NEOPIXEL": "NEOPIXEL",
+        "A2": "A2",
+        "A3": "A3",
+        "SDA5": "SDA5",
+        "SCL5": "SCL5",
+        "VBAT_SENSE": "VBAT_SENSE",
+        "MOSI": "MOSI",
+        "MISO": "MISO",
+        "SCK": "SCK"
+      }
+    },
+    {
+      "block": "whisker_usb_uart",
+      "as": "usb",
+      "title": "USB-C, CH340C, DTR auto-reset, USB to 5 V only",
+      "nets": {
+        "RESET": "RESET",
+        "RXD": "RXD",
+        "TXD": "TXD",
+        "VBUS_F": "VBUS_F",
+        "USB_DP": "USB_DP",
+        "USB_DM": "USB_DM"
+      }
+    },
+    {
+      "block": "whisker_battery_in",
+      "as": "bat",
+      "title": "2S battery: reverse-polarity FET, TVS, servo-rail bulk",
+      "nets": {
+        "VBUCK": "VBUCK",
+        "VBAT_SENSE": "VBAT_SENSE",
+        "BAT_RAW": "BAT_RAW"
+      }
+    },
+    {
+      "block": "whisker_buck_5v",
+      "as": "buck",
+      "title": "5 V / 3 A buck (TPS563201)",
+      "nets": {
+        "VBUCK": "VBUCK",
+        "SW": "BUCK_SW"
+      }
+    },
+    {
+      "block": "whisker_ldo_3v3",
+      "as": "ldo",
+      "title": "3.3 V LDO (XC6206)"
+    },
+    {
+      "block": "whisker_i2c_bridge",
+      "as": "i2c",
+      "title": "I2C 5 V / 3.3 V bridge (PCA9306)",
+      "nets": {
+        "SDA": "SDA",
+        "SCL": "SCL",
+        "SDA5": "SDA5",
+        "SCL5": "SCL5",
+        "I2C_EN": "I2C_EN"
+      }
+    },
+    {
+      "block": "whisker_servo_driver",
+      "as": "pwm",
+      "title": "PCA9685 servo PWM, 0x40",
+      "nets": {
+        "SDA": "SDA",
+        "SCL": "SCL",
+        "A3": "A3",
+        "PWM0": "PWM0",
+        "PWM1": "PWM1",
+        "PWM4": "PWM4",
+        "PWM6": "PWM6",
+        "PWM7": "PWM7",
+        "PWM8": "PWM8",
+        "PWM9": "PWM9",
+        "PWM11": "PWM11",
+        "PWM12": "PWM12",
+        "PWM14": "PWM14",
+        "PWM15": "PWM15"
+      }
+    },
+    {
+      "block": "whisker_imu_mpu6050",
+      "as": "imu",
+      "title": "MPU-6050 IMU, 0x68",
+      "nets": {
+        "SDA": "SDA",
+        "SCL": "SCL",
+        "IMU_INT": "IMU_INT"
+      }
+    },
+    {
+      "block": "whisker_eeprom_24c64",
+      "as": "eeprom",
+      "title": "AT24C64 EEPROM, 0x54",
+      "nets": {
+        "SDA": "SDA",
+        "SCL": "SCL"
+      }
+    },
+    {
+      "block": "whisker_buzzer_piezo",
+      "as": "buzz",
+      "title": "Piezo buzzer (D5)",
+      "nets": {
+        "BUZZER": "BUZZER"
+      }
+    },
+    {
+      "block": "whisker_ir_receiver",
+      "as": "ir",
+      "title": "IR receiver (D4)",
+      "nets": {
+        "IR": "IR"
+      }
+    },
+    {
+      "block": "whisker_neopixel",
+      "as": "neo",
+      "title": "NeoPixel (D10)",
+      "nets": {
+        "NEOPIXEL": "NEOPIXEL"
+      }
+    },
+    {
+      "block": "gpio_led",
+      "as": "led_d3",
+      "title": "Status LED (D3)",
+      "nets": {
+        "SIG": "LED_D3"
+      },
+      "values": {
+        "D?": "Green (D3)"
+      }
+    },
+    {
+      "block": "led_indicator",
+      "as": "led_5v",
+      "title": "5 V power LED",
+      "nets": {
+        "3V3": "5V"
+      },
+      "values": {
+        "D?": "Blue (5V)",
+        "R?": "1k"
+      }
+    },
+    {
+      "block": "whisker_grove",
+      "as": "g1",
+      "title": "Grove G1: I2C (3.3 V)",
+      "nets": {
+        "SIG_A": "SCL",
+        "SIG_B": "SDA"
+      }
+    },
+    {
+      "block": "whisker_grove",
+      "as": "g2",
+      "title": "Grove G2: A2 / A3",
+      "nets": {
+        "SIG_A": "A2",
+        "SIG_B": "A3"
+      }
+    },
+    {
+      "block": "whisker_grove",
+      "as": "g3",
+      "title": "Grove G3: D8 / D9",
+      "nets": {
+        "SIG_A": "D8",
+        "SIG_B": "D9"
+      }
+    },
+    {
+      "block": "whisker_grove",
+      "as": "g4",
+      "title": "Grove G4: D6 / D7",
+      "nets": {
+        "SIG_A": "D6",
+        "SIG_B": "D7"
+      }
+    },
+    {
+      "block": "whisker_serial_socket",
+      "as": "serial",
+      "title": "6-pin serial socket (BT / WiFi dongle)",
+      "nets": {
+        "RESET": "RESET",
+        "TXD": "TXD",
+        "RXD": "RXD"
+      },
+      "silk": [
+        "DTR",
+        "TX",
+        "RX",
+        "5V",
+        "NC",
+        "GND"
+      ]
+    },
+    {
+      "block": "whisker_pi_header",
+      "as": "pi",
+      "title": "Raspberry Pi 2x5 (Pi pins 1-10)",
+      "nets": {
+        "SDA": "SDA",
+        "SCL": "SCL",
+        "RESET": "RESET",
+        "RXD": "RXD",
+        "TXD": "TXD"
+      }
+    },
+    {
+      "block": "whisker_servo_single",
+      "as": "srv_tail",
+      "title": "Servo: tail (ch 4)",
+      "nets": {
+        "PWM": "PWM4"
+      }
+    },
+    {
+      "block": "whisker_servo_pair",
+      "as": "srv_rh",
+      "title": "Servos: right hind knee (ch 7), hip (ch 6)",
+      "nets": {
+        "PWM_A": "PWM7",
+        "PWM_B": "PWM6"
+      }
+    },
+    {
+      "block": "whisker_servo_pair",
+      "as": "srv_lh",
+      "title": "Servos: left hind hip (ch 1), knee (ch 0)",
+      "nets": {
+        "PWM_A": "PWM1",
+        "PWM_B": "PWM0"
+      }
+    },
+    {
+      "block": "whisker_servo_pair",
+      "as": "srv_rf",
+      "title": "Servos: right front shoulder (ch 9), knee (ch 8)",
+      "nets": {
+        "PWM_A": "PWM9",
+        "PWM_B": "PWM8"
+      }
+    },
+    {
+      "block": "whisker_servo_single",
+      "as": "srv_tilt",
+      "title": "Servo: head tilt (ch 11)",
+      "nets": {
+        "PWM": "PWM11"
+      }
+    },
+    {
+      "block": "whisker_servo_pair",
+      "as": "srv_lf",
+      "title": "Servos: left front knee (ch 15), shoulder (ch 14)",
+      "nets": {
+        "PWM_A": "PWM15",
+        "PWM_B": "PWM14"
+      }
+    },
+    {
+      "block": "whisker_servo_single",
+      "as": "srv_pan",
+      "title": "Servo: head pan (ch 12)",
+      "nets": {
+        "PWM": "PWM12"
+      }
+    },
+    {
+      "block": "whisker_mounting_hole",
+      "as": "h_tl",
+      "title": "Mounting hole (58 x 49 mm pattern)"
+    },
+    {
+      "block": "whisker_mounting_hole",
+      "as": "h_tr",
+      "title": "Mounting hole (58 x 49 mm pattern)"
+    },
+    {
+      "block": "whisker_mounting_hole",
+      "as": "h_bl",
+      "title": "Mounting hole (58 x 49 mm pattern)"
+    },
+    {
+      "block": "whisker_mounting_hole",
+      "as": "h_br",
+      "title": "Mounting hole (58 x 49 mm pattern)"
+    }
+  ],
+  "pwrFlags": [
+    "GND",
+    "VBAT",
+    "VBUS",
+    "VBUCK",
+    "VBUS_F",
+    "AVCC",
+    "I2C_EN"
+  ],
+  "netClasses": [
+    {
+      "name": "BATTERY",
+      "nets": [
+        "BAT_RAW"
+      ],
+      "track": 2.0,
+      "clearance": 0.2,
+      "via": [
+        1.2,
+        0.7
+      ],
+      "currentA": 5.0,
+      "why": "the pack to the reverse-polarity FET: all of the board's current, 5 A at the pack's limit (spec 1.3). The FET's drain pad sits 0.7 mm below the battery pin, so 2.0 mm reaches it on F.Cu; the current budget keeps the ladder from narrowing it. At 1.0 mm the router put 10.9 mm of it on In1 behind one 0.4 mm via, about 1.2 A at a 10 C rise on 1 oz inner copper (2026-10-02)"
+    },
+    {
+      "name": "SERVO",
+      "nets": [
+        "VBAT"
+      ],
+      "track": 1.0,
+      "clearance": 0.2,
+      "via": [
+        0.8,
+        0.4
+      ],
+      "currentA": 2.4,
+      "why": "the 2S pack to 11 servos, pack-limited to 5 A (spec 3.2); currentA 2.4 is what 1.0 mm of 1 oz outer copper carries at a 10 C rise (route.ipc2221_amps), and it keeps the ladder from narrowing the rail (it went to 0.2 mm once, 2026-10-02); the In2 VBAT pour carries the rest. 1.0 mm still enters the AON6411's 1.27 mm-pitch source pins and the 0402 divider clear of their neighbours; VBAT is also poured on In2 after routing (board.pours)"
+    },
+    {
+      "name": "BUCK",
+      "nets": [
+        "VBUCK",
+        "BUCK_SW"
+      ],
+      "track": 0.6,
+      "clearance": 0.2,
+      "via": [
+        0.8,
+        0.4
+      ],
+      "why": "the buck's input (about 2.3 A at 3 A out from 7.4 V) and switch node, both a few mm long. VIN and SW leave adjacent pins 0.95 mm apart: at 0.8 mm SW stayed open at U5 (2026-10-02); 0.6 mm leaves room to fan out"
+    },
+    {
+      "name": "PWR5",
+      "nets": [
+        "5V",
+        "VBUS",
+        "VBUS_F"
+      ],
+      "track": 0.5,
+      "clearance": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "why": "the 5 V logic rail (MCU, Grove, dongle, Pi) and the USB feed; 0.5 mm is the widest that enters the TQFP-32's 0.8 mm-pitch VCC pins and the LM66100's SC-70 pins at 0.2 mm"
+    },
+    {
+      "name": "PWR3",
+      "nets": [
+        "3V3"
+      ],
+      "track": 0.25,
+      "clearance": 0.15,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "why": "tens of mA; 0.25 mm enters the MPU-6050's 0.5 mm-pitch QFN pins, and 0.15 mm is the PCA9306 land's own pad gap (a 0.2 mm class clearance put DRC rows on U7's pads 1-3, 2026-10-02)"
+    }
+  ],
+  "board": {
+    "width": 64.8,
+    "height": 55.4,
+    "corner_radius": 1.0,
+    "layers": 4,
+    "origin": [
+      100.0,
+      100.0
+    ],
+    "shape": {
+      "type": "polygon",
+      "points": [
+        [
+          0.1,
+          55.3
+        ],
+        [
+          64.7,
+          55.3
+        ],
+        [
+          64.7,
+          0.1
+        ],
+        [
+          44.8,
+          0.1
+        ],
+        [
+          44.8,
+          5.8
+        ],
+        [
+          6.4,
+          5.8
+        ],
+        [
+          6.4,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ],
+      "fillets": [
+        3.0,
+        3.0,
+        2.0,
+        0.5,
+        1.0,
+        1.0,
+        1.0,
+        2.0
+      ]
+    },
+    "rules": {
+      "clearance": 0.15,
+      "track": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "edge_clearance": 0.5,
+      "hole_to_hole": 0.5,
+      "min_through_hole": 0.3,
+      "min_track": 0.15,
+      "why_min_track": "every class is 0.2 mm or wider; 0.15 leaves room for Freerouting's rounding",
+      "why_clearance": "0.15 mm default (as ice_core): the PCA9306's VSSOP-8 land has 0.15 mm between its 0.35 mm pads at 0.5 mm pitch, so 0.2 mm failed DRC on the footprint itself and Freerouting would not enter it (2026-10-02: 26 open, U7 clearance rows); the power classes keep 0.2 mm"
+    },
+    "planes": {},
+    "pours": {
+      "In1.Cu": "5V",
+      "In2.Cu": "VBAT"
+    },
+    "keepouts": [
+      {
+        "name": "boss_tl",
+        "rect": [
+          0.0,
+          0.0,
+          6.72,
+          6.53
+        ],
+        "layers": "all",
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "boss_tr",
+        "rect": [
+          57.72,
+          0.0,
+          64.8,
+          6.53
+        ],
+        "layers": "all",
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "boss_bl",
+        "rect": [
+          0.0,
+          48.53,
+          6.72,
+          55.4
+        ],
+        "layers": "all",
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "boss_br",
+        "rect": [
+          57.72,
+          48.53,
+          64.8,
+          55.4
+        ],
+        "layers": "all",
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ]
+      }
+    ],
+    "notes": "Outline: the stock NyBoard V1 footprint (spec 2.2, photo-measured, +-0.5 mm on edges) pulled in 0.1 mm per side: 64.6 x 55.2 mm, top lobes at 55.3, notch x 6.4-44.8 with its floor at 49.6 (spec y). The notch's right edge sits 0.1 mm inside the photo's 44.9 so the Pi socket's pads keep 0.5 mm to the edge at the Pi's own pin positions. Copper keep-outs at the four holes cover the 7 mm boss (spec 2.7). 4 layers: F.Cu / In1 routing, then a 5V pour / In2 routing, then a VBAT pour / B.Cu, poured GND (it carries 36 mm of track). No plane while routing: the servo headers and the battery socket sit on the back, and Freerouting mirrors a back part's layer stack, so a through-hole pin whose In1 shape route.strip_plane_pin_shapes dropped reaches the router with an In1 shape again (2026-10-02, In1 as the GND plane: every pair of same-net pins on the back headers stayed unrouted, J11-3 to J11-4, J11-5 to J11-6, 26-30 open). With no plane all four layers route, and In1 is poured GND after a measured 0 open."
+  },
+  "placement": {
+    "h_tl:H?": {
+      "lock": [
+        3.22,
+        3.03
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "top-left hole of the 58.0 x 49.0 pattern, centred as measured (spec 2.7)"
+    },
+    "h_tr:H?": {
+      "lock": [
+        61.22,
+        3.03
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "top-right hole"
+    },
+    "h_bl:H?": {
+      "lock": [
+        3.22,
+        52.03
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "bottom-left hole"
+    },
+    "h_br:H?": {
+      "lock": [
+        61.22,
+        52.03
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "bottom-right hole"
+    },
+    "srv_tail:J?": {
+      "lock": [
+        11.26,
+        32.4
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "tail, ch 4: lower-left group column 1, pad 1 on the PWM row (spec 1.6)",
+      "side": "bottom"
+    },
+    "srv_rh:J?": {
+      "lock": [
+        18.88,
+        32.4
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "right hind knee ch 7 (pad-1 column, x 18.88) and hip ch 6 (x 16.34): lower-left group",
+      "side": "bottom"
+    },
+    "srv_lh:J?": {
+      "lock": [
+        16.34,
+        22.2
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "left hind hip ch 1 (pad-1 column, x 16.34) and knee ch 0 (x 18.88): upper-left group",
+      "side": "bottom"
+    },
+    "srv_rf:J?": {
+      "lock": [
+        43.44,
+        32.4
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "right front shoulder ch 9 (pad-1 column, x 43.44) and knee ch 8 (x 40.90): lower-right group",
+      "side": "bottom"
+    },
+    "srv_tilt:J?": {
+      "lock": [
+        48.52,
+        32.4
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "head tilt, ch 11: lower-right group column 4",
+      "side": "bottom"
+    },
+    "srv_lf:J?": {
+      "lock": [
+        40.9,
+        22.2
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "left front knee ch 15 (pad-1 column, x 40.90) and shoulder ch 14 (x 43.44): upper-right group",
+      "side": "bottom"
+    },
+    "srv_pan:J?": {
+      "lock": [
+        48.52,
+        22.2
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "head pan, ch 12: upper-right group column 4",
+      "side": "bottom"
+    },
+    "bat:J?": {
+      "lock": [
+        24.45,
+        40.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "keyed XH on the back where the stock socket is: + at (24.45, 14.8), - at +2.5 mm in x (spec 1.7)",
+      "side": "bottom"
+    },
+    "pi:J?": {
+      "lock": [
+        56.35,
+        4.3
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "Pi pin 1 where a face-to-face Pi's pin 1 lands (spec 1.7: 61.22 - 4.87), every pad on its Pi pin"
+    },
+    "serial:J?": {
+      "lock": [
+        2.6,
+        21.0
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "6-pin socket along the rear edge, DTR lowest and GND toward the notch (spec 1.7), 0.3 mm in from the photo column"
+    },
+    "g1:J?": {
+      "lock": [
+        54.3,
+        11.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "Grove column on the front (head) edge, G1 at the stock height, 7 mm pitch so the lower-right corner stays free for the Pi parts (8 mm left a GND pin open, 2026-10-02)"
+    },
+    "g2:J?": {
+      "lock": [
+        54.3,
+        18.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "Grove column on the front (head) edge, G1 at the stock height, 7 mm pitch so the lower-right corner stays free for the Pi parts (8 mm left a GND pin open, 2026-10-02)"
+    },
+    "g3:J?": {
+      "lock": [
+        54.3,
+        25.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "Grove column on the front (head) edge, G1 at the stock height, 7 mm pitch so the lower-right corner stays free for the Pi parts (8 mm left a GND pin open, 2026-10-02)"
+    },
+    "g4:J?": {
+      "lock": [
+        54.3,
+        32.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "Grove column on the front (head) edge, G1 at the stock height, 7 mm pitch so the lower-right corner stays free for the Pi parts (8 mm left a GND pin open, 2026-10-02)"
+    },
+    "usb:J?": {
+      "edge": "left",
+      "y": 0.9,
+      "overhang": 0.5,
+      "why": "USB-C mouth out of the rear (tail) edge below the serial socket; shell 0.6 mm proud of the outline"
+    },
+    "mcu:SW?": {
+      "lock": [
+        4.6,
+        44.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "reset at the rear edge as stock (spec 1.7)"
+    },
+    "ir:U?": {
+      "lock": [
+        5.0,
+        37.3
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "IR receiver at the rear edge, where the stock receiver looks out"
+    },
+    "ir:C?": {
+      "lock": [
+        5.0,
+        40.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "IR supply decoupling under the receiver"
+    },
+    "mcu:U?": {
+      "lock": [
+        15.8,
+        47.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "ATmega328P in the bottom-left, where the stock MCU sits"
+    },
+    "mcu:Y?": {
+      "lock": [
+        8.65,
+        50.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "16 MHz crystal at XTAL1/XTAL2 (pins 7/8, left side)"
+    },
+    "mcu:C1?": {
+      "lock": [
+        8.7,
+        53.3
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "XTAL1 load cap straight under the crystal's XTAL1 pin"
+    },
+    "mcu:C2?": {
+      "lock": [
+        12.3,
+        53.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "XTAL2 load cap"
+    },
+    "mcu:C3?": {
+      "lock": [
+        9.5,
+        45.9
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "VCC decoupling at pins 4/5/6"
+    },
+    "mcu:C5?": {
+      "lock": [
+        14.95,
+        53.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "AREF decoupling"
+    },
+    "mcu:C4?": {
+      "lock": [
+        17.05,
+        53.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "AVCC decoupling behind the ferrite"
+    },
+    "mcu:FB?": {
+      "lock": [
+        19.7,
+        53.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "AVCC ferrite from 5 V"
+    },
+    "serial:C?": {
+      "lock": [
+        10.25,
+        41.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "dongle DTR auto-reset cap, by RESET"
+    },
+    "mcu:R?": {
+      "lock": [
+        12.4,
+        41.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "RESET pull-up above pin 29"
+    },
+    "usb:C3?": {
+      "lock": [
+        14.55,
+        41.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "CH340C DTR auto-reset cap, by RESET"
+    },
+    "mcu:J?": {
+      "lock": [
+        18.8,
+        8.45
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "ICSP 2x3 in the top strip between the CH340C and the buzzer"
+    },
+    "usb:U2?": {
+      "lock": [
+        11.6,
+        10.4
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "CH340C in the top-left corner, UD+/UD- on its lower row toward the receptacle"
+    },
+    "usb:C1?": {
+      "lock": [
+        5.4,
+        10.4
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "CH340C VCC decoupling at pins 16/1"
+    },
+    "usb:C2?": {
+      "lock": [
+        11.0,
+        15.05
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "V3 decoupling under pin 4"
+    },
+    "usb:R3?": {
+      "lock": [
+        10.2,
+        16.8
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "1k from CH340C TXD to the MCU's RX"
+    },
+    "usb:U3?": {
+      "lock": [
+        10.3,
+        19.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "LM66100 ideal diode: USB 5 V onto the logic rail only"
+    },
+    "usb:C5?": {
+      "lock": [
+        13.2,
+        18.85
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "LM66100 input cap"
+    },
+    "usb:F?": {
+      "lock": [
+        11.4,
+        21.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "500 mA PTC on VBUS"
+    },
+    "usb:C4?": {
+      "lock": [
+        11.0,
+        24.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "VBUS bulk at the receptacle"
+    },
+    "usb:R1?": {
+      "lock": [
+        9.7,
+        25.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "CC1 5.1k at the receptacle"
+    },
+    "usb:U1?": {
+      "lock": [
+        11.2,
+        28.6
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "USBLC6 clamp on D+/D- right at the receptacle"
+    },
+    "usb:R2?": {
+      "lock": [
+        13.7,
+        28.5
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "CC2 5.1k beside the clamp, clear of the tail header's pad 1"
+    },
+    "bat:D3?": {
+      "lock": [
+        16.1,
+        25.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "battery / servo-rail LED"
+    },
+    "bat:R2?": {
+      "lock": [
+        19.2,
+        25.0
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "battery LED resistor, fed from the upper-left group's rail pin"
+    },
+    "led_5v:D?": {
+      "lock": [
+        16.1,
+        27.3
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "5 V logic LED"
+    },
+    "led_5v:R?": {
+      "lock": [
+        19.2,
+        27.3
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "5 V LED resistor"
+    },
+    "led_d3:D?": {
+      "lock": [
+        16.1,
+        29.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "D3 status LED (firmware LED_PIN 3)"
+    },
+    "led_d3:R?": {
+      "lock": [
+        19.2,
+        29.6
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "D3 LED resistor"
+    },
+    "buzz:BZ?": {
+      "lock": [
+        29.9,
+        12.7
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "piezo buzzer in the top-centre"
+    },
+    "buzz:R?": {
+      "lock": [
+        27.0,
+        19.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "buzzer series resistor"
+    },
+    "pwm:U?": {
+      "lock": [
+        29.9,
+        26.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "PCA9685 between the servo groups: LED0-7 face the left groups, LED8-15 the right"
+    },
+    "pwm:C1?": {
+      "lock": [
+        32.0,
+        19.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "PCA9685 VDD decoupling at pin 28"
+    },
+    "pwm:C2?": {
+      "lock": [
+        36.6,
+        20.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "PCA9685 bulk"
+    },
+    "srv_lh:C?": {
+      "lock": [
+        22.15,
+        18.8
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "10 uF on the rail at the upper-left group"
+    },
+    "srv_lh:R2?": {
+      "lock": [
+        23.3,
+        23.0
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "1k PWM series resistor, left column beside the PCA9685's LED0-7 pins"
+    },
+    "srv_lh:R1?": {
+      "lock": [
+        23.3,
+        24.8
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "1k PWM series resistor, left column beside the PCA9685's LED0-7 pins"
+    },
+    "srv_tail:R?": {
+      "lock": [
+        23.3,
+        26.6
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "1k PWM series resistor, left column beside the PCA9685's LED0-7 pins"
+    },
+    "srv_rh:R2?": {
+      "lock": [
+        23.3,
+        28.4
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "1k PWM series resistor, left column beside the PCA9685's LED0-7 pins"
+    },
+    "srv_rh:R1?": {
+      "lock": [
+        23.3,
+        30.2
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "1k PWM series resistor, left column beside the PCA9685's LED0-7 pins"
+    },
+    "srv_lf:R1?": {
+      "lock": [
+        36.5,
+        22.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "1k PWM series resistor, right column beside the PCA9685's LED8-15 pins"
+    },
+    "srv_lf:R2?": {
+      "lock": [
+        36.5,
+        24.3
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "1k PWM series resistor, right column beside the PCA9685's LED8-15 pins"
+    },
+    "srv_pan:R?": {
+      "lock": [
+        36.5,
+        26.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "1k PWM series resistor, right column beside the PCA9685's LED8-15 pins"
+    },
+    "srv_tilt:R?": {
+      "lock": [
+        36.5,
+        27.7
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "1k PWM series resistor, right column beside the PCA9685's LED8-15 pins"
+    },
+    "srv_rf:R1?": {
+      "lock": [
+        36.5,
+        29.4
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "1k PWM series resistor, right column beside the PCA9685's LED8-15 pins"
+    },
+    "srv_rf:R2?": {
+      "lock": [
+        36.5,
+        31.1
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "1k PWM series resistor, right column beside the PCA9685's LED8-15 pins"
+    },
+    "srv_rh:C?": {
+      "lock": [
+        19.4,
+        40.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "10 uF on the rail at the lower-left group"
+    },
+    "srv_lf:C?": {
+      "lock": [
+        37.7,
+        17.1
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "10 uF on the rail at the upper-right group"
+    },
+    "i2c:U?": {
+      "lock": [
+        25.6,
+        34.4
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "PCA9306: 3.3 V side left, 5 V side right"
+    },
+    "i2c:R4?": {
+      "lock": [
+        22.3,
+        34.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "SDA 3.3 V pull-up"
+    },
+    "i2c:R5?": {
+      "lock": [
+        22.3,
+        37.3
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "SCL 3.3 V pull-up"
+    },
+    "i2c:C?": {
+      "lock": [
+        25.0,
+        37.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "VREF1 decoupling"
+    },
+    "i2c:R1?": {
+      "lock": [
+        29.6,
+        33.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "VREF2/EN 200k to 5 V"
+    },
+    "i2c:R2?": {
+      "lock": [
+        29.6,
+        34.8
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "SDA5 pull-up"
+    },
+    "i2c:R3?": {
+      "lock": [
+        29.6,
+        36.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "SCL5 pull-up"
+    },
+    "i2c:JP?": {
+      "lock": [
+        28.5,
+        38.8
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "PI I2C jumper: bridge to hand the bus to a Pi"
+    },
+    "ldo:U?": {
+      "lock": [
+        34.0,
+        34.4
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "3.3 V LDO"
+    },
+    "ldo:C1?": {
+      "lock": [
+        33.0,
+        37.4
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "LDO input cap"
+    },
+    "ldo:C2?": {
+      "lock": [
+        36.3,
+        37.4
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "LDO output cap"
+    },
+    "pwm:JP?": {
+      "lock": [
+        37.7,
+        34.4
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "CAL jumper: bridge to feed PWM channel 3 to A3"
+    },
+    "imu:U?": {
+      "lock": [
+        40.6,
+        10.6
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "MPU-6050 turned 180 degrees: pin 1 at the bottom-right in top view, as the stock board's (spec 1.7)"
+    },
+    "imu:C1?": {
+      "lock": [
+        39.9,
+        14.45
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "VDD decoupling"
+    },
+    "imu:C2?": {
+      "lock": [
+        42.0,
+        14.45
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "VLOGIC decoupling"
+    },
+    "imu:C3?": {
+      "lock": [
+        44.1,
+        14.45
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "REGOUT cap"
+    },
+    "imu:C4?": {
+      "lock": [
+        46.8,
+        14.45
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "CPOUT charge-pump cap"
+    },
+    "eeprom:U?": {
+      "lock": [
+        47.6,
+        9.9
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "AT24C64 beside the IMU"
+    },
+    "eeprom:C?": {
+      "lock": [
+        44.07,
+        9.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "EEPROM decoupling at pin 8"
+    },
+    "neo:D?": {
+      "lock": [
+        42.6,
+        27.3
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "NeoPixel between the right servo groups, toward the head"
+    },
+    "srv_rf:C?": {
+      "lock": [
+        47.6,
+        27.3
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "10 uF on the rail at the lower-right group"
+    },
+    "neo:C?": {
+      "lock": [
+        49.9,
+        28.6
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "NeoPixel decoupling"
+    },
+    "neo:R?": {
+      "lock": [
+        49.9,
+        25.5
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "NeoPixel data series resistor"
+    },
+    "bat:Q?": {
+      "lock": [
+        26.4,
+        44.4
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "AON6411 under the battery socket: drain toward the + pin, source pins toward the bulk caps"
+    },
+    "bat:R1?": {
+      "lock": [
+        30.5,
+        42.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "FET gate pull-down beside the gate pin"
+    },
+    "bat:D1?": {
+      "lock": [
+        26.4,
+        50.6
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "SMAJ10A across the protected rail, cathode at the FET's source"
+    },
+    "bat:C1?": {
+      "lock": [
+        33.6,
+        49.2
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "330 uF servo-rail bulk, + up"
+    },
+    "bat:C2?": {
+      "lock": [
+        40.9,
+        49.2
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "330 uF servo-rail bulk, + up"
+    },
+    "bat:D2?": {
+      "lock": [
+        34.6,
+        41.6
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "SS34 from the servo rail to the buck input"
+    },
+    "bat:R3?": {
+      "lock": [
+        22.0,
+        43.9
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "battery divider, top: its rail pad faces up, where the 1.0 mm rail arrives (facing down it stayed open in the strip, 2026-10-02)"
+    },
+    "bat:R4?": {
+      "lock": [
+        22.0,
+        47.0
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "battery divider, bottom: sense pad up, against the top resistor's"
+    },
+    "bat:C3?": {
+      "lock": [
+        22.0,
+        49.6
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "A7 filter cap"
+    },
+    "buck:C1?": {
+      "lock": [
+        40.4,
+        41.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "buck input 22 uF at the feed diode"
+    },
+    "buck:C3?": {
+      "lock": [
+        43.4,
+        41.6
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "buck input 100 nF"
+    },
+    "buck:U?": {
+      "lock": [
+        46.7,
+        45.5
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "TPS563201, SW on its lower row toward the inductor"
+    },
+    "buck:C2?": {
+      "lock": [
+        49.6,
+        45.8
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "buck input 22 uF at VIN/GND"
+    },
+    "buck:R1?": {
+      "lock": [
+        46.3,
+        40.3
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "feedback top 82k"
+    },
+    "buck:R2?": {
+      "lock": [
+        49.6,
+        40.3
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "feedback bottom 15k"
+    },
+    "buck:R3?": {
+      "lock": [
+        46.3,
+        42.4
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "EN pull-up to VIN"
+    },
+    "buck:C4?": {
+      "lock": [
+        49.6,
+        42.4
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "bootstrap cap"
+    },
+    "buck:L?": {
+      "lock": [
+        48.0,
+        51.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "4.7 uH buck inductor"
+    },
+    "buck:C5?": {
+      "lock": [
+        52.5,
+        51.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "5 V output 22 uF"
+    },
+    "buck:C6?": {
+      "lock": [
+        54.7,
+        51.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "5 V output 22 uF"
+    },
+    "buck:C7?": {
+      "lock": [
+        56.9,
+        51.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "5 V output 22 uF"
+    },
+    "pi:R1?": {
+      "lock": [
+        53.5,
+        38.5
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "1k from the Pi's TXD to the MCU's RX"
+    },
+    "pi:R2?": {
+      "lock": [
+        57.0,
+        38.5
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "divider top: MCU TX to the Pi's RXD"
+    },
+    "pi:R3?": {
+      "lock": [
+        53.5,
+        40.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "divider bottom"
+    },
+    "pi:C?": {
+      "lock": [
+        57.0,
+        40.6
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "Pi GPIO4 reset coupling cap"
+    }
+  },
+  "route": {
+    "passes": 30,
+    "fanout": true,
+    "solve_s": 400,
+    "why": "the ladder is computed from each rung's opens; the outline is stated and shaped, so it is never grown"
+  },
+  "stitch_pitch": 5.0,
+  "silk": {
+    "words": {
+      "pi:J?": "PI",
+      "g1:J?": "G1 I2C",
+      "g4:J?": "G4",
+      "bat:J?": "BATT 2S",
+      "srv_tail:J?": "TAIL",
+      "srv_tilt:J?": "TILT",
+      "srv_pan:J?": "PAN",
+      "srv_rh:J?": "RH",
+      "srv_lh:J?": "LH",
+      "srv_rf:J?": "RF SHLD KNEE",
+      "srv_lf:J?": "LF SHLD KNEE"
+    },
+    "words_why": "only words with a free spot around their part: the front is packed, and USB, RESET, ICSP, G2/G3, IR, the LEDs, the jumpers and the ICs found none (each candidate tried on every ring the silk stage tries, 2026-10-02); the hind pairs read RH / LH (hip and knee) and G4 has no pin names because the longer words found no spot",
+    "polarity": [
+      {
+        "part": "bat:J?",
+        "net": "BAT_RAW",
+        "why": "pin 1 is the pack's +"
+      }
+    ],
+    "title": [
+      {
+        "text": "Whisker",
+        "y": 9.0,
+        "size": 1.6,
+        "bold": true
+      },
+      {
+        "text": "Nybble / OpenCat compatible",
+        "y": 11.6,
+        "size": 0.8
+      },
+      {
+        "text": "rev {revision}  heypcb-kicad",
+        "y": 13.6,
+        "size": 0.8
+      },
+      {
+        "text": "not fabricated",
+        "y": 15.6,
+        "size": 0.8
+      }
+    ]
+  },
+  "captions": {
+    "place_3d": "Whisker placed: the stock Nybble footprint with its notch, servo headers on the back at the stock grid, Grove sockets on the front edge, USB-C and the dongle socket at the tail.",
+    "done_3d": "ATmega328P + PCA9685 + MPU-6050 + AT24C64, CH340C on USB-C, AON6411 reverse-polarity FET, TPS563201 5 V / 3 A buck."
+  }
+}
